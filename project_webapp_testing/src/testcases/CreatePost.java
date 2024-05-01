@@ -4,8 +4,8 @@ import static org.junit.Assert.fail;
 
 import java.time.Duration;
 
-import org.junit.Assert;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
@@ -16,7 +16,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class DeleteAccount {
+public class CreatePost {
    private WebDriver driver;
    private String baseUrl;
    private boolean acceptNextAlert = true;
@@ -44,15 +44,20 @@ public class DeleteAccount {
       driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("bIll#123");
       Thread.sleep(1500);
       driver.findElement(By.className("btn-primary")).click();
-      Thread.sleep(1500);
-      driver.findElement(By.linkText("Account")).click();
-      Thread.sleep(1500);
-      driver.findElement(By.xpath("//*[@id=\"navbarNav\"]/ul/li[3]/div/a[1]")).click();
-      Thread.sleep(1500);
-      driver.findElement(By.className("delete-account-btn")).click();
-      Thread.sleep(2000);
-      Assert.assertEquals("Your account has been successfully deleted.", driver.findElement(By.className("alert-danger")).getText());
       Thread.sleep(3000);
+      driver.findElement(By.xpath("//*[@id=\"navbarNav\"]/ul/li[2]")).click();
+      Thread.sleep(3000);
+      driver.findElement(By.xpath("//*[@id=\"id_title\"]")).sendKeys("Testing");
+      driver.findElement(By.xpath("//*[@id=\"id_post_description\"]")).sendKeys("Test");
+      driver.findElement(By.xpath("//*[@id=\"id_ticket_course\"]/option[2]")).click();
+      Thread.sleep(5000);
+      driver.findElement(By.xpath("/html/body/div[2]/form/input[2]")).click();
+      Thread.sleep(5000);
+      Assert.assertEquals("Add Post To Database\n" + "\n" + "\n" + "\n" + "Your Post was submitted successfully", driver.findElement(By.xpath("/html/body/div[2]")).getText());
+      driver.findElement(By.linkText("Account")).click();
+      Thread.sleep(2000);
+      driver.findElement(By.xpath("//*[@id=\"navbarNav\"]/ul/li[3]/div/a[3]")).click();
+      Thread.sleep(5000);
    }
 
    @After

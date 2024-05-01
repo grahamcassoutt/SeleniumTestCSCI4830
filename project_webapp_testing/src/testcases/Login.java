@@ -26,7 +26,7 @@ public class Login {
    public void setUp() throws Exception {
       System.setProperty("webdriver.chrome.driver", "lib/mac/chromedriver");
       driver = new ChromeDriver();
-      baseUrl = "http://127.0.0.1:8000/";
+      baseUrl = "http://ec2-3-95-26-219.compute-1.amazonaws.com:8000";
       driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
       js = (JavascriptExecutor) driver;
    }
@@ -39,11 +39,15 @@ public class Login {
       Thread.sleep(1500);
       driver.findElement(By.xpath("//*[@id=\"navbarNav\"]/ul/li[2]/div/a[1]")).click();
       Thread.sleep(1500);
-      driver.findElement(By.xpath("//*[@id=\"username\"]")).sendKeys("Test");
+      driver.findElement(By.xpath("//*[@id=\"username\"]")).sendKeys("Testing");
       driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("bIll#123");
       Thread.sleep(1500);
       driver.findElement(By.className("btn-primary")).click();
       Thread.sleep(3000);
+      driver.findElement(By.linkText("Account")).click();
+      Thread.sleep(2000);
+      driver.findElement(By.xpath("//*[@id=\"navbarNav\"]/ul/li[3]/div/a[3]")).click();
+      Thread.sleep(5000);
    }
 
    @After

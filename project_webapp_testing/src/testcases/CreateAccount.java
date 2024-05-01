@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 import java.time.Duration;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
@@ -26,7 +27,7 @@ public class CreateAccount {
    public void setUp() throws Exception {
       System.setProperty("webdriver.chrome.driver", "lib/mac/chromedriver");
       driver = new ChromeDriver();
-      baseUrl = "http://127.0.0.1:8000/";
+      baseUrl = "http://ec2-3-95-26-219.compute-1.amazonaws.com:8000";
       driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
       js = (JavascriptExecutor) driver;
    }
@@ -39,7 +40,7 @@ public class CreateAccount {
       Thread.sleep(1500);
       driver.findElement(By.xpath("//*[@id=\"navbarNav\"]/ul/li[2]/div/a[2]")).click();
       Thread.sleep(1500);
-      driver.findElement(By.xpath("//*[@id=\"id_username\"]")).sendKeys("Test");
+      driver.findElement(By.xpath("//*[@id=\"id_username\"]")).sendKeys("Testing");
       driver.findElement(By.xpath("//*[@id=\"id_first_name\"]")).sendKeys("Bill");
       driver.findElement(By.xpath("//*[@id=\"id_last_name\"]")).sendKeys("Smith");
       driver.findElement(By.xpath("//*[@id=\"id_email\"]")).sendKeys("Bill.Smith@gmail.com");
@@ -48,6 +49,12 @@ public class CreateAccount {
       Thread.sleep(2000);
       driver.findElement(By.className("btn-success")).click();
       Thread.sleep(2000);
+      Assert.assertEquals("Discover", driver.findElement(By.xpath("/html/body/div[2]/h2")).getText());
+      Thread.sleep(1000);
+      driver.findElement(By.linkText("Account")).click();
+      Thread.sleep(2000);
+      driver.findElement(By.xpath("//*[@id=\"navbarNav\"]/ul/li[3]/div/a[3]")).click();
+      Thread.sleep(5000);
    }
 
    @After

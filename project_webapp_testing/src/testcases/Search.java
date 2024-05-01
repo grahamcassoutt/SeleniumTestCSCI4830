@@ -4,8 +4,8 @@ import static org.junit.Assert.fail;
 
 import java.time.Duration;
 
-import org.junit.Assert;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
@@ -16,7 +16,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class DeleteAccount {
+public class Search {
    private WebDriver driver;
    private String baseUrl;
    private boolean acceptNextAlert = true;
@@ -36,22 +36,17 @@ public class DeleteAccount {
    public void testUntitledTestCase() throws Exception {
       driver.manage().window().maximize();
       driver.get(baseUrl);
-      driver.findElement(By.linkText("Account")).click();
+      driver.findElement(By.linkText("Subjects")).click();
       Thread.sleep(1500);
-      driver.findElement(By.xpath("//*[@id=\"navbarNav\"]/ul/li[2]/div/a[1]")).click();
+      driver.findElement(By.xpath("//*[@id=\"navbarNav\"]/ul/li[1]/div/a[1]")).click();
       Thread.sleep(1500);
-      driver.findElement(By.xpath("//*[@id=\"username\"]")).sendKeys("Testing");
-      driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("bIll#123");
+      driver.findElement(By.xpath("//*[@id=\"navbarNav\"]/form/input[2]")).sendKeys("Testing");
       Thread.sleep(1500);
-      driver.findElement(By.className("btn-primary")).click();
-      Thread.sleep(1500);
-      driver.findElement(By.linkText("Account")).click();
-      Thread.sleep(1500);
-      driver.findElement(By.xpath("//*[@id=\"navbarNav\"]/ul/li[3]/div/a[1]")).click();
-      Thread.sleep(1500);
-      driver.findElement(By.className("delete-account-btn")).click();
-      Thread.sleep(2000);
-      Assert.assertEquals("Your account has been successfully deleted.", driver.findElement(By.className("alert-danger")).getText());
+      driver.findElement(By.className("btn-outline-success")).click();
+      Thread.sleep(3000);
+      driver.findElement(By.xpath("/html/body/div[2]/ul/li/a")).click();
+      Thread.sleep(3000);
+      Assert.assertEquals("Title: Testing", driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/h2")).getText());
       Thread.sleep(3000);
    }
 
